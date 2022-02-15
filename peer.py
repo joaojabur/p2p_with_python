@@ -55,9 +55,8 @@ class Peer(threading.Thread):
 			client.close()
 
 	def recv_peers(self) -> None:
-		client, client_addr = self.socket.accept()
+		client = self.socket.accept()[0]
 		data = client.recv(PACKET_SIZE).decode('utf-8')
-		print(data)
 
 		self.max_connections = int(data.split("_")[0])
 		self.peers = data.split("_")[1:]
